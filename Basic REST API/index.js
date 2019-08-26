@@ -3,11 +3,31 @@ const express = require("express");
 const appConfig = require("./config/appConfig");
 const fs = require("fs");
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 // Declaring an instance or creating an application instance
 const app = express();
 
-// Reading the Routes
+
+//middlewares
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false}))
+app.use(cookieParser())
+
+
+
+// Bootstrap models
+let modelsPath = './models'
+fs.readdirSync(modelsPath).forEach(function (file) {
+    if (~file.indexOf('.js')) {
+        console.log(file)
+        require(modelsPath + '/' + file)
+    }
+})
+// end Bootstrap models
+
+// Bootstraping the routes
 let routesPath = "./routes";
 fs.readdirSync(routesPath).forEach(function(file) {
   if (~file.indexOf(".js")) {
@@ -15,6 +35,7 @@ fs.readdirSync(routesPath).forEach(function(file) {
     route.setRouter(app);
   }
 });
+// end Bootstrap routes
 
 // Handling mongoose database connection error
 mongoose.connection.on("error", function(err) {
