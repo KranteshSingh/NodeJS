@@ -1,20 +1,19 @@
-let appConfig = {};
+let appConfig = {}
 
 appConfig.port = 3000;
 appConfig.allowedCorsOrigin = "*";
 appConfig.env = "dev";
 appConfig.db = {
-    uri : 'mongodb://test:test@127.0.0.1:27017/blogAppDB',
+    uri: 'mongodb://127.0.0.1:27017/blogAppDB',
 }
-appConfig.apiVersion = '/api/v1';
+appConfig.apiVersion  = '/api/v1';
 
-module.export = {
+module.exports = {
+    
+    port : appConfig.port,
+    allowedCorsOrigin : appConfig.allowedCorsOrigin,
+    env : appConfig.env,
+    db : appConfig.db,
+    apiVersion : appConfig.apiVersion
 
-    port: appConfig.port,
-    allowedCorsOrigin: appConfig.allowedCorsOrigin,
-    environment: appConfig.env,
-    db: appConfig.db,
-    apiVersion: appConfig.apiVersion
-
-
-}//end module export
+} //end module exports
