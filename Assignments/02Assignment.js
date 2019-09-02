@@ -28,7 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 
 app.get('/split/name', (req, res) => {
-
+	console.log(req.query);
+	res.send(req.query);
     
 });// end split name
 
