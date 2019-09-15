@@ -18,27 +18,22 @@ NOTE: You are not required to use app.listen(<port>). This will be handled by th
 
 */
 
-
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
-
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/split/name', (req, res) => {
-	console.log(req.query);
-	res.send(req.query);
-    
-});// end split name
+  const fullName = req.query.fullName;
 
-app.get('/calculate/age', (req, res) => {
+  const [firstName, lastName] = fullName.trim().split(' ');
 
-  
+  res.status(200).json({ firstName, lastName });
+  console.log(req.query);
+  res.send(req.query);
+}); // end split name
 
-
-
-});// end calculate age
+app.get('/calculate/age', (req, res) => {}); // end calculate age
 
 module.exports = app;
