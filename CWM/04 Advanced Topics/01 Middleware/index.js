@@ -4,8 +4,8 @@ const dbDebugger = require('debug')('app:db');
 const Joi = require('joi');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const courses = require('./router/courses');
-const home = require('./routes/courses');
+const courses = require('./routes/courses');
+const home = require('./routes/home');
 const logger = require('./middleware/logger');
 const express = require('express');
 const app = express();
@@ -36,7 +36,7 @@ app.use(express.static('public'));
 app.use(helmet());
 app.use(morgan('tiny'));
 app.use('/api/courses', courses);
-app.use('/home', home);
+app.use('/', home);
 
 // Configurations
 
@@ -52,11 +52,14 @@ app.use(function(req, res, next) {
   next();
 });
 
+/*
 // Testing for the node application if its works or not
 app.get('/', (req, res) => {
   //res.send('HELLO WORLD');
   res.render('index', { title: 'My Express app', message: 'Hello You' });
 });
+
+*/
 
 // Defining the configuration for Application
 const port = process.env.PORT || 3000;
